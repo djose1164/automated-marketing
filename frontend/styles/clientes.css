@@ -1,0 +1,61 @@
+h1 {
+    margin-bottom: 20px;
+  }
+  
+  .add-client-btn {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #1cc88a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+
+   
+  .add-client-btn:hover {
+    background-color: #17a673;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  th, td {
+    padding: 14px 20px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+  }
+  
+  th {
+    background-color: #f9fafc;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .delete-btn {
+    background-color: #e74a3b;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.3s;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c0392b;
+  }

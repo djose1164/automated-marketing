@@ -1,0 +1,76 @@
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  height: 100vh;
+  background-color: #f4f4f4;
+  overscroll-behavior: none;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #1e1e2f;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.logo {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.4;
+}
+
+.logo::after {
+  content: "Marketing";
+  display: block;
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav a {
+  color: #ddd;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background 0.3s, transform 0.2s;
+  position: relative;
+}
+
+.nav a.active,
+.nav a:hover {
+  background-color: #2e2e4d;
+  transform: translateX(5px);
+}
+
+.nav a.active::before,
+.nav a:hover::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #00bfff;
+  border-radius: 2px;
+}
+
+.content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+}
+

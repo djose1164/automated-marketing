@@ -1,0 +1,81 @@
+.content {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+  }
+
+  .campaign-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .campaign {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .campaign-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr auto;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .campaign-info h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+  }
+
+  .campaign-info .description {
+    color: #666;
+    margin-top: 4px;
+    font-size: 0.9rem;
+  }
+
+  .campaign-dates p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #444;
+  }
+
+  .campaign-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .campaign-actions button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #4e73df;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 0.85rem;
+  }
+
+  .campaign-actions button:hover {
+    background-color: #3b5fc1;
+  }
+
+  .add-campaign-btn {
+    margin-top: 30px;
+    padding: 10px 20px;
+    background-color: #1cc88a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+
+  .add-campaign-btn:hover {
+    background-color: #17a673;
+  }
