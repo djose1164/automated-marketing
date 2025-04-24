@@ -40,7 +40,7 @@
             </div>
             <div class="campaign-actions">
               <form
-                action="{{ url_for('nueva-campania.delete_campania', campania_id=item['id']) }}"
+                action="{{ url_for('campanias.delete_campania', campania_id=item['id']) }}"
                 method="POST"
                 style="display: inline"
               >
@@ -51,6 +51,11 @@
                   Eliminar
                 </button>
               </form>
+              <a
+                href="{{ url_for('campanias.editar_campania_render', campania_id=item['id']) }}"
+              >
+                <button>Editar</button>
+              </a>
             </div>
           </div>
         </div>

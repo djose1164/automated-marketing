@@ -45,12 +45,19 @@
             <td>{{ cliente['id'] }}</td>
             <td>{{ cliente['nombre'] }}</td>
             <td>{{ cliente['apellido'] }}</td>
+            <td>{{ cliente['correo'] }}</td>
             <td>{{ cliente['telefono'] }}</td>
-            <td>{{ cliente['usuario_id'] }}</td>
-            <td><button class="delete-btn">Eliminar</button></td>
+            <td>
+              <form
+                action="{{ url_for('clientes.eliminar_cliente', cliente_id=cliente['id']) }}"
+                method="post"
+              >
+                <button class="delete-btn">Eliminar</button>
+              </form>
+            </td>
           </tr>
+          {% endfor %}
         </tbody>
-        {% endfor %}
       </table>
     </div>
   </body>

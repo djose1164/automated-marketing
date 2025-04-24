@@ -10,15 +10,20 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = os.getenv('secret_key')
+app.config["SECRET_KEY"] = os.getenv("secret_key")
 app.register_blueprint(cliente_routes, url_prefix="/clientes")
-app.register_blueprint(campania_routes, url_prefix="/nueva-campania")
+app.register_blueprint(campania_routes, url_prefix="/campanias")
 
 
 @app.route("/")
 def index():
-    print(app.static_folder)
-    return render_template("index.html")
+    estadisticas = {
+        "emails_enviados": [120, 150, 180, 130, 170],
+        "emails_abiertos": [90, 110, 150, 100, 140],
+        "clics_promos": [40, 60, 70, 50, 65],
+        "labels": ["Lun", "Mar", "Mié", "Jue", "Vie"],
+    }
+    return render_template("index.html", estadisticas=estadisticas)
 
 
 @app.route("/campanias")
@@ -30,9 +35,11 @@ def campania_render():
 def cliente_render():
     return render_template("clientes.html", clientes=Cliente.get_clientes())
 
+
 @app.route("/nuevo-cliente")
 def nuevo_cliente_render():
     return render_template("formClientes.html")
+
 
 @app.route("/nueva-campania")
 def nueva_campania_render():

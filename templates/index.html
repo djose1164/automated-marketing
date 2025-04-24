@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Automated Marketing - Resumen</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}" />
-</head>
-<body>
-  <div class="sidebar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Automated Marketing - Resumen</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/main.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/index.css') }}"
+    />
+  </head>
+  <body>
+    <div class="sidebar">
       <div class="logo">
         <span>Automated</span>
       </div>
@@ -18,35 +27,88 @@
         <a href="{{ url_for('campania_render') }}">Campañas</a>
         <a href="{{ url_for('cliente_render') }}">Clientes</a>
       </nav>
-  </div>         
+    </div>
 
-  <div class="content" id="resumen">
-    <h1>Resumen de Actividad</h1>
+    <div class="content" id="resumen">
+      <h1>Resumen de Actividad</h1>
 
-    <div class="charts">
-      <div class="chart-container">
-        <h3>Correos Enviados</h3>
-        <canvas id="emailsSentChart"></canvas>
-      </div>
-      <div class="chart-container">
-        <h3>Correos Abiertos</h3>
-        <canvas id="emailsOpenedChart"></canvas>
-      </div>
-      <div class="chart-container">
-        <h3>Clicks en Promociones</h3>
-        <canvas id="promoClicksChart"></canvas>
-      </div>
-      <div class="chart-container campaignsNumber-box">
-        <h3>Campañas Activas</h3>
-        <div class="campaigns-info">
-          <p>8 <i class="fas fa-bullhorn"></i></p>
+      <div class="charts">
+        <div class="chart-container">
+          <h3>Correos Enviados</h3>
+          <canvas id="emailsSentChart"></canvas>
+        </div>
+        <div class="chart-container">
+          <h3>Correos Abiertos</h3>
+          <canvas id="emailsOpenedChart"></canvas>
+        </div>
+        <div class="chart-container">
+          <h3>Clicks en Promociones</h3>
+          <canvas id="promoClicksChart"></canvas>
+        </div>
+        <div class="chart-container campaignsNumber-box">
+          <h3>Campañas Activas</h3>
+          <div class="campaigns-info">
+            <p>8 <i class="fas fa-bullhorn"></i></p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="../src/charts.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      window.onload = function () {
+        const labels = {{ estadisticas['labels'] | tojson }};
+        const emailsSentData = {{ estadisticas['emails_enviados'] | tojson }};
+        const emailsOpenedData = {{ estadisticas['emails_abiertos'] | tojson }};
+        const promoClicksData = {{ estadisticas['clics_promos'] | tojson }};
+
+        const emailsSentChart = new Chart(document.getElementById('emailsSentChart'), {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Correos Enviados',
+              data: emailsSentData,
+              backgroundColor: '#4e73df'
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } }
+          }
+        });
+
+        const emailsOpenedChart = new Chart(document.getElementById('emailsOpenedChart'), {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Correos Abiertos',
+              data: emailsOpenedData,
+              backgroundColor: '#1cc88a'
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } }
+          }
+        });
+
+        const promoClicksChart = new Chart(document.getElementById('promoClicksChart'), {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Clics en Promociones',
+              data: promoClicksData,
+              backgroundColor: '#f6c23e'
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } }
+          }
+        });
+      }
+    </script>
+  </body>
 </html>
-
-

@@ -1,4 +1,5 @@
 from utils.database import get_db
+import random
 
 
 class Cliente:
@@ -7,7 +8,7 @@ class Cliente:
         res = None
         with get_db() as conn:
             cur = conn.cursor()
-            cur.execute("select * from cliente")
+            cur.execute("select c.id, nombre, apellido, telefono, correo from cliente c join usuario u on c.usuario_id = u.id")
             res = cur.fetchall()
         return [
             {
@@ -15,7 +16,12 @@ class Cliente:
                 "nombre": row[1],
                 "apellido": row[2],
                 "telefono": row[3],
-                "usuario_id": row[4],
+                "correo": row[4],
             }
             for row in res
         ]
+
+    @staticmethod
+    def generar_nombre_usuario(nombre: str, apellido: str, len: int = 5):
+        combined = nombre + apellido
+        return "".join(random.choice(combined) for _ in range(len))
