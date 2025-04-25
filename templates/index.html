@@ -38,7 +38,7 @@
           <canvas id="emailsSentChart"></canvas>
         </div>
         <div class="chart-container">
-          <h3>Porcentaje de clicks por correo enviado</h3>
+          <h3>Tasa de clicks por correos enviados</h3>
           <div class="pieChartContainer">
             <canvas id="ratioSentClicksChart"></canvas>
           </div>
@@ -85,8 +85,8 @@
           data: {
             labels: labels,
             datasets: [{
-              data: ratioSentClicks,
-              backgroundColor: ['#4e73df', '#1cc88a'],
+              data: [emailsSentData.reduce((a, b) => a + b, 0), promoClicksData.reduce((a, b) => a + b, 0)],
+              backgroundColor: ['#4e73df', '#f6c23e'],
               borderColor: '#4e73df',
               borderWidth: 1
             }]

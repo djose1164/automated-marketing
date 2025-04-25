@@ -56,7 +56,7 @@
     height: 100%;
   }
 
-  #ratioSentClicksChart {
+  .pieChartContainer canvas {
     width: 250px !important;
     height: 250px !important; 
   }
