@@ -79,3 +79,7 @@
   .add-campaign-btn:hover {
     background-color: #17a673;
   }
+
+  .delete-btn {
+    background-color: #e74a3b !important;
+  }

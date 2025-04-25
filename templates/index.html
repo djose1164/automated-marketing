@@ -38,8 +38,10 @@
           <canvas id="emailsSentChart"></canvas>
         </div>
         <div class="chart-container">
-          <h3>Correos Abiertos</h3>
-          <canvas id="emailsOpenedChart"></canvas>
+          <h3>Porcentaje de clicks por correo enviado</h3>
+          <div class="pieChartContainer">
+            <canvas id="ratioSentClicksChart"></canvas>
+          </div>
         </div>
         <div class="chart-container">
           <h3>Clicks en Promociones</h3>
@@ -58,7 +60,7 @@
       window.onload = function () {
         const labels = {{ estadisticas['labels'] | tojson }};
         const emailsSentData = {{ estadisticas['emails_enviados'] | tojson }};
-        const emailsOpenedData = {{ estadisticas['emails_abiertos'] | tojson }};
+        const ratioSentClicks = {{ estadisticas['emails_abiertos'] | tojson }}; // Habria que cambiar los datos que se pasan a la grafica
         const promoClicksData = {{ estadisticas['clics_promos'] | tojson }};
 
         const emailsSentChart = new Chart(document.getElementById('emailsSentChart'), {
@@ -68,7 +70,8 @@
             datasets: [{
               label: 'Correos Enviados',
               data: emailsSentData,
-              backgroundColor: '#4e73df'
+              backgroundColor:'#4e73df',
+              borderColor: '#4e73df'
             }]
           },
           options: {
@@ -77,14 +80,15 @@
           }
         });
 
-        const emailsOpenedChart = new Chart(document.getElementById('emailsOpenedChart'), {
-          type: 'bar',
+        const emailsSentClicksRatio = new Chart(document.getElementById('ratioSentClicksChart'), {
+          type: 'pie',
           data: {
             labels: labels,
             datasets: [{
-              label: 'Correos Abiertos',
-              data: emailsOpenedData,
-              backgroundColor: '#1cc88a'
+              data: ratioSentClicks,
+              backgroundColor: ['#4e73df', '#1cc88a'],
+              borderColor: '#4e73df',
+              borderWidth: 1
             }]
           },
           options: {

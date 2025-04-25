@@ -39,23 +39,24 @@
               <p><strong>Fin:</strong> {{ item['fecha_fin'] }}</p>
             </div>
             <div class="campaign-actions">
+              <a
+                href="{{ url_for('campanias.editar_campania_render', campania_id=item['id']) }}"
+              >
+                <button>Editar</button>
+              </a>
               <form
                 action="{{ url_for('campanias.delete_campania', campania_id=item['id']) }}"
                 method="POST"
                 style="display: inline"
               >
                 <button
+                  class="delete-btn"
                   type="submit"
                   onclick="return confirm('¿Estás seguro de eliminar este elemento?');"
                 >
                   Eliminar
                 </button>
               </form>
-              <a
-                href="{{ url_for('campanias.editar_campania_render', campania_id=item['id']) }}"
-              >
-                <button>Editar</button>
-              </a>
             </div>
           </div>
         </div>
