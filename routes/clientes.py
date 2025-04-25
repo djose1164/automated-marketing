@@ -25,22 +25,22 @@ def nuevo_cliente():
     with get_db() as conn:
         cur = conn.cursor()
         sql = (
-            "insert into usuario(nombre_usuario, correo, contrasena, rol_id, provincia)"
-            "values(?, ?, ?, ?, ?)"
+            "insert into usuario(nombre_usuario, correo, contrasena, rol_id)"
+            "values(?, ?, ?, ?)"
         )
         nombre_usuario = Cliente.generar_nombre_usuario(nombre, apellido)
         cliente_rol = 3
-        cur.execute(sql, (nombre_usuario, correo, nombre_usuario, cliente_rol, provincia))
+        cur.execute(sql, (nombre_usuario, correo, nombre_usuario, cliente_rol))
         if cur.rowcount == 0:
             flash("Error al insertar usuario.")
             return redirect(url_for("index"))
         usuario_id = cur.lastrowid
 
         sql = (
-            "insert into cliente(nombre, apellido, telefono, usuario_id)"
-            "values(?, ?, ?, ?)"
+            "insert into cliente(nombre, apellido, telefono, usuario_id, provincia)"
+            "values(?, ?, ?, ?, ?)"
         )
-        cur.execute(sql, (nombre, apellido, telefono, usuario_id))
+        cur.execute(sql, (nombre, apellido, telefono, usuario_id, provincia))
         conn.commit()
         res = cur.rowcount
 
@@ -107,12 +107,4 @@ def editar_cliente():
         cur.execute(sql, (correo, usuario_id,))
         conn.commit()
         return redirect("/clientes")
-
-
-
-
-    
-
-
-
 
