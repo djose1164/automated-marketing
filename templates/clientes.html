@@ -49,6 +49,12 @@
             <td>{{ cliente['telefono'] }}</td>
             <td>
               <form
+                action="{{ url_for('clientes.editar_cliente_render', cliente_id=cliente['id']) }}"
+                method="get"
+              >
+                <button class="edit-btn">Editar</button>
+              </form>
+              <form
                 action="{{ url_for('clientes.eliminar_cliente', cliente_id=cliente['id']) }}"
                 method="post"
               > <!-- Habría que cambiar el action -->
@@ -58,7 +64,17 @@
                 action="{{ url_for('clientes.eliminar_cliente', cliente_id=cliente['id']) }}"
                 method="post"
               >
+<<<<<<< HEAD
                 <button class="delete-btn">Eliminar</button>
+=======
+                <button
+                  class="delete-btn"
+                  type="submit"
+                  onclick="return confirm('¿Estás seguro de eliminar este elemento?');"
+                >
+                  Eliminar
+                </button>
+>>>>>>> aa55a5108a3d556c628f59b135ca86ccd4894503
               </form>
             </td>
           </tr>
