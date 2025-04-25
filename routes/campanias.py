@@ -42,7 +42,7 @@ def nueva_campania():
         flash("Error")
         return redirect(url_for("index"))
 
-    return redirect(url_for("nueva_campania_render"))
+    return redirect("/campanias")
 
 
 @campania_routes.route("/<int:campania_id>", methods=["POST"])
