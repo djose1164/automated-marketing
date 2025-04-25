@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, redirect, request, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for
 
 from models.clientes import Cliente
 from utils.database import get_db
@@ -25,12 +25,12 @@ def nuevo_cliente():
     with get_db() as conn:
         cur = conn.cursor()
         sql = (
-            "insert into usuario(nombre_usuario, correo, contrasena, rol_id)"
-            "values(?, ?, ?, ?)"
+            "insert into usuario(nombre_usuario, correo, contrasena, rol_id, provincia)"
+            "values(?, ?, ?, ?, ?)"
         )
         nombre_usuario = Cliente.generar_nombre_usuario(nombre, apellido)
         cliente_rol = 3
-        cur.execute(sql, (nombre_usuario, correo, nombre_usuario, cliente_rol))
+        cur.execute(sql, (nombre_usuario, correo, nombre_usuario, cliente_rol, provincia))
         if cur.rowcount == 0:
             flash("Error al insertar usuario.")
             return redirect(url_for("index"))
@@ -63,3 +63,56 @@ def eliminar_cliente(cliente_id: int):
     if res == 0:
         flash("Error al eliminar cliente")
     return redirect(url_for("cliente_render"))
+
+@cliente_routes.route("/<int:cliente_id>")
+def editar_cliente_render(cliente_id: int):
+    provincias = [
+        'Azua', 'Bahoruco', 'Barahona', 'Dajabón', 'Distrito Nacional',
+        'Duarte', 'Elías Piña', 'El Seibo', 'Espaillat', 'Hato Mayor',
+        'Hermanas Mirabal', 'Independencia', 'La Altagracia', 'La Romana',
+        'La Vega', 'María Trinidad Sánchez', 'Monseñor Nouel', 'Monte Cristi',
+        'Monte Plata', 'Pedernales', 'Peravia', 'Puerto Plata', 'Samaná',
+        'San Cristóbal', 'San José de Ocoa', 'San Juan', 'San Pedro de Macorís',
+        'Sánchez Ramírez', 'Santiago', 'Santiago Rodríguez', 'Santo Domingo',
+        'Valverde'
+    ]
+    return render_template("editarClientes.html", 
+                           cliente=Cliente.get_cliente_by_id(cliente_id),
+                           provincias=provincias)
+
+@cliente_routes.route("/editar", methods=["POST"])
+def editar_cliente():
+    cliente_id = request.form["cliente_id"]
+    usuario_id = request.form.get("usuario_id")
+    nombre = request.form.get("nombre")
+    apellido = request.form.get("apellido")
+    correo = request.form.get("correo")
+    telefono = request.form.get("telefono")
+    provincia = request.form.get("provincia")
+
+    print((nombre, apellido, telefono, provincia, cliente_id, usuario_id))
+
+    with get_db() as conn:
+        cur = conn.cursor()
+        sql = (
+            "update cliente "
+            "set nombre = ?, apellido = ?, telefono = ?, provincia = ? " 
+            "where id = ?"
+        )
+        cur.execute(sql, (nombre, apellido, telefono, provincia, cliente_id))
+
+        sql = "update usuario " \
+            "set correo = ? " \
+            "where id = ?"
+        cur.execute(sql, (correo, usuario_id,))
+        conn.commit()
+        return redirect("/clientes")
+
+
+
+
+    
+
+
+
+

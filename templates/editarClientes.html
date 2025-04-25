@@ -4,63 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar cliente</title>
-    <link rel="stylesheet" href="styles/main.css"> 
-    <link rel="stylesheet" href="styles/forms.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/forms.css') }}">
 </head>
 <body>
     <main>
-        <form action="#" method="POST"> <!-- Cambia "#" por la URL de la API -->
+        <form action="{{ url_for('clientes.editar_cliente') }}" method="POST">
+            <input type="hidden" name="cliente_id" value="{{ cliente['id'] }}">
+            <input type="hidden" name="usuario_id" value="{{ cliente['usuario_id'] }}">
             <h1>Editar cliente</h1>
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
+                <input type="text" id="nombre" name="nombre" value="{{ cliente['nombre'] }}" required>
             </div>
             <div class="form-group">
                 <label for="apellido">Apellido:</label>
-                <input type="text" id="apellido" name="apellido" required>
+                <input type="text" id="apellido" name="apellido" value="{{ cliente['apellido'] }}" required>
             </div>
             <div class="form-group">
                 <label for="email">Correo Electrónico:</label>
-                <input type="email" id="email" name="email"  required>
+                <input type="email" id="email" name="correo" value="{{ cliente['correo'] }}" required>
             </div>
             <div class="form-group">
                 <label for="telefono">Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" required>
+                <input type="tel" id="telefono" name="telefono" value="{{ cliente['telefono'] }}" required>
             </div>
             <div class="form-group">
                 <label for="provincia">Provincia:</label>
                 <select id="provincia" name="provincia" required>
-                    <option value="">Seleccione una provincia</option>
-                    <option value="azua">Azua</option>
-                    <option value="bahoruco">Bahoruco</option>
-                    <option value="barahona">Barahona</option>
-                    <option value="dajabon">Dajabón</option>
-                    <option value="distrito_nacional">Distrito Nacional</option>
-                    <option value="duarte">Duarte</option>
-                    <option value="el_seibo">El Seibo</option>
-                    <option value="elias_piña">Elías Piña</option>
-                    <option value="espailat">Espaillat</option>
-                    <option value="hato_mayor">Hato Mayor</option>
-                    <option value="hermanas_mirabal">Hermanas Mirabal</option>
-                    <option value="independencia">Independencia</option>
-                    <option value="la_altagracia">La Altagracia</option>
-                    <option value="la_romana">La Romana</option>
-                    <option value="la_vega">La Vega</option>
-                    <option value="maria_trinidad_sanchez">María Trinidad Sánchez</option>
-                    <option value="monte_cristi">Monte Cristi</option>
-                    <option value="monte_plata">Monte Plata</option>
-                    <option value="pedernales">Pedernales</option>
-                    <option value="peravia">Peravia</option>
-                    <option value="puerto_plata">Puerto Plata</option>
-                    <option value="samana">Samaná</option>
-                    <option value="san_cristobal">San Cristóbal</option>
-                    <option value="san_juan">San Juan</option>
-                    <option value="san_pedro_de_macoris">San Pedro de Macorís</option>
-                    <option value="sanchez_ramirez">Sánchez Ramírez</option>
-                    <option value="santiago">Santiago</option>
-                    <option value="santiago_rodriguez">Santiago Rodríguez</option>
-                    <option value="santo_domingo">Santo Domingo</option>
-                    <option value="valverde">Valverde</option>
+                    {% for provincia in provincias %}
+                    <option value="{{ provincia }}" {% if provincia == cliente['provincia'] %}selected{% endif %}>{{ provincia }}</option>
+                    {% endfor %}
                 </select>
             </div>
             <div class="form-group">

@@ -1,35 +1,62 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Añadir Campaña</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/forms.css') }}">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Añadir Campañas</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/forms.css') }}"
+    />
+  </head>
+  <body>
     <main>
-        <form action="#" method="POST"> <!-- Cambia "#" por la URL de la API -->
-            <h1>Registro</h1>
-            <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
-            </div>
-            <div class="form-group">
-                <label for="Descripción">Descripción:</label>
-                <textarea id="Descripción" name="Descripción" rows="4" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="fechaInicio">Fecha de inicio:</label>
-                <input type="date" id="fechaInicio" name="fechaInicio" required>
-            </div>
-            <div class="form-group">
-                <label for="fechaFinal">Fecha final:</label>
-                <input type="date" id="fechaFinal" name="fechaFinal" required>
-            </div>
-            <div class="form-group">
-                <button type="submit">Añadir campaña</button>
-            </div>
-        </form>
+      <form action="{{ url_for('campanias.nueva_campania') }}" method="POST">
+        <h1>Registro</h1>
+        <div class="form-group">
+          <label for="nombre">Nombre:</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            value="{{ request.form['nombre'] }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Descripción">Descripción:</label>
+          <textarea
+            id="Descripción"
+            name="descripcion"
+            rows="4"
+            value="{{ request.form['descripcion'] }}"
+            required
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="fechaInicio">Fecha de inicio:</label>
+          <input
+            type="date"
+            id="fechaInicio"
+            name="fecha_inicio"
+            value="{{ request.form['fecha_inicio'] }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="fechaFinal">Fecha final:</label>
+          <input
+            type="date"
+            id="fechaFinal"
+            name="fecha_fin"
+            value="{{ request.form['fecha_fin'] }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <button type="submit">Añadir campaña</button>
+        </div>
+      </form>
     </main>
-</body>
+  </body>
 </html>

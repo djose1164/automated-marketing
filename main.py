@@ -43,7 +43,7 @@ def nuevo_cliente_render():
 
 @app.route("/nueva-campania")
 def nueva_campania_render():
-    return render_template("formCampañas.html")
+    return render_template("formCampanias.html")
 
 
 if __name__ == "__main__":
