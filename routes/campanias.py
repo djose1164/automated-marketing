@@ -25,24 +25,24 @@ def campania_index():
     return res
 
 
-# @campania_routes.route("/", methods=["POST"])
-# def campania_render():
-#     nombre = request.form.get("nombre")
-#     descripcion = request.form.get("descripcion")
-#     fecha_inicio = request.form.get("fecha_inicio")
-#     fecha_fin = request.form.get("fecha_fin")
+@campania_routes.route("/", methods=["POST"])
+def nueva_campania():
+    nombre = request.form.get("nombre")
+    descripcion = request.form.get("descripcion")
+    fecha_inicio = request.form.get("fecha_inicio")
+    fecha_fin = request.form.get("fecha_fin")
 
-#     with get_db() as conn:
-#         cur = conn.cursor()
-#         sql = "insert into campania(id, nombre, descripcion, fecha_inicio, fecha_fin) values(?, ?, ?, ?, ?)"
-#         cur.execute(sql, (None, nombre, descripcion, fecha_inicio, fecha_fin))
-#         conn.commit()
+    with get_db() as conn:
+        cur = conn.cursor()
+        sql = "insert into campania(id, nombre, descripcion, fecha_inicio, fecha_fin) values(?, ?, ?, ?, ?)"
+        cur.execute(sql, (None, nombre, descripcion, fecha_inicio, fecha_fin))
+        conn.commit()
 
-#     if not cur.rowcount != 1:
-#         flash("Error")
-#         return redirect(url_for("index"))
+    if cur.rowcount != 1:
+        flash("Error")
+        return redirect(url_for("index"))
 
-#     return redirect(url_for("nueva_campania_render"))
+    return redirect(url_for("nueva_campania_render"))
 
 
 @campania_routes.route("/<int:campania_id>", methods=["POST"])
