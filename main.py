@@ -17,11 +17,13 @@ app.register_blueprint(campania_routes, url_prefix="/campanias")
 
 @app.route("/")
 def index():
+    campanias_activas = len(Campania.get_campanias_activas())
     estadisticas = {
         "emails_enviados": [120, 150, 180, 130, 170],
-        "emails_abiertos": [90, 110, 150, 100, 140],
+        "emails_abiertos": [90, 110, 150, 10, 12],
         "clics_promos": [40, 60, 70, 50, 65],
         "labels": ["Lun", "Mar", "Mié", "Jue", "Vie"],
+        "campanias_activas": campanias_activas
     }
     return render_template("index.html", estadisticas=estadisticas)
 

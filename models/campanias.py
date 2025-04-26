@@ -53,3 +53,18 @@ class Campania:
                 }
                 for row in res
             ]
+
+    def get_campanias_activas():
+        with get_db() as conn:
+            cur = conn.cursor()
+            cur.execute("select * from campania where fecha_fin >= now()")
+            return [
+                {
+                    "id": row[0],
+                    "nombre": row[1],
+                    "descripcion": row[2],
+                    "fecha_inicio": row[3],
+                    "fecha_fin": row[4],
+                }
+                for row in cur.fetchall()
+            ]
