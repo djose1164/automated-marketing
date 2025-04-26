@@ -34,8 +34,8 @@
         <a href="{{ url_for('nueva_campania_render') }}">
           <button class="add-campaign-btn"><i class="fas fa-plus"></i> Añadir</button>
         </a>
-        <form action="#" method="get" class="search-form">
-          <input type="text" placeholder="Buscar campaña" id="search-input" />
+        <form action="/campanias/busqueda" method="get" class="search-form">
+          <input type="text" placeholder="Buscar campaña" id="search-input" name="search_input"/>
           <button type="submit" class="search-btn"><i class="fas fa-search"></i> Buscar</button>
         </form>
       </div>

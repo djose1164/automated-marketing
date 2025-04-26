@@ -64,21 +64,49 @@ def eliminar_cliente(cliente_id: int):
         flash("Error al eliminar cliente")
     return redirect(url_for("cliente_render"))
 
+
 @cliente_routes.route("/<int:cliente_id>")
 def editar_cliente_render(cliente_id: int):
     provincias = [
-        'Azua', 'Bahoruco', 'Barahona', 'Dajabón', 'Distrito Nacional',
-        'Duarte', 'Elías Piña', 'El Seibo', 'Espaillat', 'Hato Mayor',
-        'Hermanas Mirabal', 'Independencia', 'La Altagracia', 'La Romana',
-        'La Vega', 'María Trinidad Sánchez', 'Monseñor Nouel', 'Monte Cristi',
-        'Monte Plata', 'Pedernales', 'Peravia', 'Puerto Plata', 'Samaná',
-        'San Cristóbal', 'San José de Ocoa', 'San Juan', 'San Pedro de Macorís',
-        'Sánchez Ramírez', 'Santiago', 'Santiago Rodríguez', 'Santo Domingo',
-        'Valverde'
+        "Azua",
+        "Bahoruco",
+        "Barahona",
+        "Dajabón",
+        "Distrito Nacional",
+        "Duarte",
+        "Elías Piña",
+        "El Seibo",
+        "Espaillat",
+        "Hato Mayor",
+        "Hermanas Mirabal",
+        "Independencia",
+        "La Altagracia",
+        "La Romana",
+        "La Vega",
+        "María Trinidad Sánchez",
+        "Monseñor Nouel",
+        "Monte Cristi",
+        "Monte Plata",
+        "Pedernales",
+        "Peravia",
+        "Puerto Plata",
+        "Samaná",
+        "San Cristóbal",
+        "San José de Ocoa",
+        "San Juan",
+        "San Pedro de Macorís",
+        "Sánchez Ramírez",
+        "Santiago",
+        "Santiago Rodríguez",
+        "Santo Domingo",
+        "Valverde",
     ]
-    return render_template("editarClientes.html", 
-                           cliente=Cliente.get_cliente_by_id(cliente_id),
-                           provincias=provincias)
+    return render_template(
+        "editarClientes.html",
+        cliente=Cliente.get_cliente_by_id(cliente_id),
+        provincias=provincias,
+    )
+
 
 @cliente_routes.route("/editar", methods=["POST"])
 def editar_cliente():
@@ -96,15 +124,26 @@ def editar_cliente():
         cur = conn.cursor()
         sql = (
             "update cliente "
-            "set nombre = ?, apellido = ?, telefono = ?, provincia = ? " 
+            "set nombre = ?, apellido = ?, telefono = ?, provincia = ? "
             "where id = ?"
         )
         cur.execute(sql, (nombre, apellido, telefono, provincia, cliente_id))
 
-        sql = "update usuario " \
-            "set correo = ? " \
-            "where id = ?"
-        cur.execute(sql, (correo, usuario_id,))
+        sql = "update usuario " "set correo = ? " "where id = ?"
+        cur.execute(
+            sql,
+            (
+                correo,
+                usuario_id,
+            ),
+        )
         conn.commit()
         return redirect("/clientes")
 
+
+@cliente_routes.route("/busqueda")
+def busqueda_cliente():
+    search_text = request.args.get("search_input")
+    return render_template(
+        "clientes.html", clientes=Cliente.get_cliente_by_nombre_o_apellido(search_text)
+    )
