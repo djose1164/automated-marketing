@@ -80,3 +80,12 @@ def editar_campania():
         cur.execute(sql, (nombre, descripcion, fecha_inicio, fecha_fin, campania_id))
         conn.commit()
     return redirect("/campanias")
+
+
+@campania_routes.route("/busqueda")
+def busqueda_caompanias():
+    input_text = request.args.get("search_input")
+    print(input_text)
+    return render_template(
+        "campañas.html", campanias=Campania.get_campanias_by_name(input_text)
+    )

@@ -36,3 +36,20 @@ class Campania:
                 "fecha_inicio": row[3],
                 "fecha_fin": row[4],
             }
+
+    @staticmethod
+    def get_campanias_by_name(nombre: str):
+        with get_db() as conn:
+            cur = conn.cursor()
+            cur.execute("select * from campania where nombre like ?", (f"%{nombre}%",))
+            res = cur.fetchall()
+            return [
+                {
+                    "id": row[0],
+                    "nombre": row[1],
+                    "descripcion": row[2],
+                    "fecha_inicio": row[3],
+                    "fecha_fin": row[4],
+                }
+                for row in res
+            ]

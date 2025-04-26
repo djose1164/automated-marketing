@@ -32,11 +32,12 @@
         <a href="{{ url_for('nuevo_cliente_render') }}">
           <button class="add-client-btn"><i class="fas fa-plus"></i> Añadir</button>
         </a>
-        <form action="#" method="get" class="search-form">
+        <form action="/clientes/busqueda" method="get" class="search-form">
           <input
             type="text"
             placeholder="Buscar nombre o correo"
             id="search-input"
+            name="search_input"
           />
           <button type="submit" class="search-btn"><i class="fas fa-search"></i> Buscar</button>
         </form>
