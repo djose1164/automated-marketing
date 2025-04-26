@@ -1,3 +1,7 @@
+td form {
+  display: inline-block;
+}
+
 h1 {
     margin-bottom: 20px;
   }
@@ -46,31 +50,64 @@ h1 {
   }
   
   .delete-btn {
-    background-color: #e74a3b;
-    color: white;
+    color: red;
     border: none;
     padding: 6px 12px;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 0.85rem;
-    transition: background 0.3s;
+    font-size: 1.2rem;
+    background-color: white;
   }
   
-  .delete-btn:hover {
-    background-color: #c0392b;
-  }
+
 
   .edit-btn {
+    color: #4e73df;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    background-color: white;
+  }
+
+
+  .top-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-form {
+    align-self: flex-end;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9fafc;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .search-form input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 300px;
+    margin-right: 10px;
+  }
+
+  .search-form button {
+    padding: 10px 20px;
     background-color: #4e73df;
     color: white;
     border: none;
-    padding: 6px 12px;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 0.85rem;
+    font-weight: bold;
     transition: background 0.3s;
   }
 
-  .edit-btn:hover {
+  .search-form button:hover {
     background-color: #3b5fc1;
   }
